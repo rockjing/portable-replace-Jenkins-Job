@@ -1,0 +1,80 @@
+Started by user [8mha:AAAAlR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzmEgZO/dLi1CL9xJRcAOFfZOu+AAAA[0m???
+Building in workspace E:\Jenkins_work\QA_UM_PIC\workspace
+[workspace] $ cmd /c call C:\Users\UM_CI_~1\AppData\Local\Temp\hudson5691840203166105090.bat
+
+E:\Jenkins_work\QA_UM_PIC\workspace>SET PKG_NAME=UM_PIC.war 
+
+E:\Jenkins_work\QA_UM_PIC\workspace>SET WORKSPACE=\Jenkins_work\UM_PIC\workspace\target 
+
+E:\Jenkins_work\QA_UM_PIC\workspace>SET WAR_PKG=\Jenkins_work\UM_PIC\workspace\target\UM_PIC.war 
+
+E:\Jenkins_work\QA_UM_PIC\workspace>SET CUR_TIME=Mon _5/_6/_15-46-43 
+
+E:\Jenkins_work\QA_UM_PIC\workspace>SET BAK_FOLDER=\Jenkins_work\UM_PIC\workspace\target\BAK\Mon _5/_6/_15-46-43 
+
+E:\Jenkins_work\QA_UM_PIC\workspace>ECHO Backup war to  
+Backup war to 
+
+E:\Jenkins_work\QA_UM_PIC\workspace>IF NOT EXIST "\Jenkins_work\UM_PIC\workspace\target\BAK\Mon _5/_6/_15-46-43" MKDIR "\Jenkins_work\UM_PIC\workspace\target\BAK\Mon _5/_6/_15-46-43" 
+
+E:\Jenkins_work\QA_UM_PIC\workspace>E:
+
+E:\Jenkins_work\QA_UM_PIC\workspace>CD \Jenkins_work\UM_PIC\workspace\target 
+
+E:\Jenkins_work\UM_PIC\workspace\target>SET UMCONFIG=\Jenkins_work\UM-JENKINS-CONFIG\workspace 
+
+E:\Jenkins_work\UM_PIC\workspace\target>Java -jar \Jenkins_work\UM-JENKINS-CONFIG\workspace\portable-config-maven-plugin-1.1.6-SNAPSHOT-cli.jar  UM_PIC.war -c \Jenkins_work\UM-JENKINS-CONFIG\workspace\UM-PIC\UM-TEST\um_test.xml 
+[INFO] Tmp file: C:\Users\UM_CI_~1\AppData\Local\Temp\26123238237842332305116927192297149.jar
+[INFO] === Starting to find the to be replaced file
+[INFO] Found Config file : WEB-INF/classes/application.common.properties
+[INFO] Replacing: UM_PIC.war!WEB-INF/classes/application.common.properties
+[INFO] redis.Host=192.168.88.80
+[INFO] permission.authorization.port=8080
+[INFO] Found Config file : WEB-INF/classes/application.properties
+[INFO] Replacing: UM_PIC.war!WEB-INF/classes/application.properties
+[INFO] redis.Host=192.168.88.80
+[INFO] permission.authorization.port=8080
+[INFO] GraphicsMagick=/usr/local/GraphicsMagick-1.3.22
+[INFO] PicWater=/usr/upload/sy.png
+[INFO] Fontpath=/usr/java/default/jre/lib/fonts/LucidaBrightDemiBold.ttf
+[INFO] war.filePath=/usr/apache-tomcat-7.0.67/UM_PIC/ROOT/WEB-INF/web.xml
+[INFO] version.filePath=/usr/apache-tomcat-7.0.67/UM_PIC/ROOT/WEB-INF/web.xml
+[INFO] FileRoot=/usr/upload/
+[INFO] ApiRoot=/usr/upload/apps/
+[INFO] Defined config files :2 found file : 2
+[INFO] Replacing: E:\Jenkins_work\UM_PIC\workspace\target\UM_PIC.war with: C:\Users\UM_CI_~1\AppData\Local\Temp\26123238237842332305116927192297149.jar
+
+E:\Jenkins_work\UM_PIC\workspace\target>copy UM_PIC.war "\Jenkins_work\UM_PIC\workspace\target\BAK\Mon _5/_6/_15-46-43" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_PIC\workspace\target>copy git_version.txt "\Jenkins_work\UM_PIC\workspace\target\BAK\Mon _5/_6/_15-46-43" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_PIC\workspace\target>scp git_version.txt wzp@192.168.88.82:/home/wzp/git_version.txt 
+
+E:\Jenkins_work\UM_PIC\workspace\target>scp UM_PIC.war wzp@192.168.88.82:/home/wzp/ 
+
+E:\Jenkins_work\UM_PIC\workspace\target>exit 0 
+SSH: Connecting from host [WIN12FILESRV1]
+SSH: Connecting with configuration [LINUX WEB SVR-82-Test] ...
+SSH: EXEC: STDOUT/STDERR from command [/usr/apache-tomcat-7.0.65/publish_pic.sh] ...
+tomcat shutdown!!!
+kill -9 27537
+Stop tomcat success
+rm -rf  /usr/apache-tomcat-7.0.65/webapps/UM_PIC
+rm -rf  /usr/apache-tomcat-7.0.65/work/Catalina/img.umu360.com
+rm -rf  /usr/apache-tomcat-7.0.65/conf/Catalina/img.umu360.com
+rm -f  /usr/apache-tomcat-7.0.65/temp/*
+rm -f  /usr/apache-tomcat-7.0.65/logs/*
+rm: cannot remove ‘/usr/apache-tomcat-7.0.65/logs/logs’: Is a directory
+rm -rf  /usr/apache-tomcat-7.0.65/UM_PIC/ROOT
+mv -f /home/wzp/UM_PIC.war /usr/apache-tomcat-7.0.65/UM_PIC/ROOT.war
+mv -f /home/wzp/git_version.txt /usr/apache-tomcat-7.0.65/UM_PIC/
+tomcat is starting!
+Tomcat started.
+ln -s /usr/upload /usr/apache-tomcat-7.0.65/UM_PIC/ROOT/upload
+SSH: EXEC: completed after 70,296 ms
+SSH: Disconnecting configuration [LINUX WEB SVR-82-Test] ...
+SSH: Transferred 0 file(s)
+Build step 'Send files or execute commands over SSH' changed build result to SUCCESS
+Finished: SUCCESS

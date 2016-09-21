@@ -1,0 +1,89 @@
+Started by user [8mha:AAAAlR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzmEgZO/dLi1CL9xJRcAOFfZOu+AAAA[0m???
+Building in workspace E:\Jenkins_work\DevTest_UM_UIC\workspace
+[workspace] $ cmd /c call C:\Users\UM_CI_~1\AppData\Local\Temp\hudson7914850520663937247.bat
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>SET PKG_NAME=UM_UIC.war 
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>SET WORKSPACE=\Jenkins_work\UM_UIC\workspace\target 
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>SET WAR_PKG=\Jenkins_work\UM_UIC\workspace\target\UM_UIC.war 
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>SET CUR_TIME=Fri _9/_9/_17-54-28 
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>SET BAK_FOLDER=\Jenkins_work\UM_UIC\workspace\target\BAK\Fri _9/_9/_17-54-28 
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>ECHO Backup war to  
+Backup war to 
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>IF NOT EXIST "\Jenkins_work\UM_UIC\workspace\target\BAK\Fri _9/_9/_17-54-28" MKDIR "\Jenkins_work\UM_UIC\workspace\target\BAK\Fri _9/_9/_17-54-28" 
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>E:
+
+E:\Jenkins_work\DevTest_UM_UIC\workspace>CD \Jenkins_work\UM_UIC\workspace\target 
+
+E:\Jenkins_work\UM_UIC\workspace\target>SET UMCONFIG=\Jenkins_work\UM-JENKINS-CONFIG\workspace 
+
+E:\Jenkins_work\UM_UIC\workspace\target>Java -jar \Jenkins_work\UM-JENKINS-CONFIG\workspace\portable-config-maven-plugin-1.1.6-SNAPSHOT-cli.jar  UM_UIC.war -c \Jenkins_work\UM-JENKINS-CONFIG\workspace\UM-UIC\UM-TEST\um_uic_test.xml 
+[Info] To replaced file is UM_UIC.war
+[Info] config file is um_uic_test.xml
+[INFO] Tmp file: C:\Users\UM_CI_~1\AppData\Local\Temp\15869944293664592281819207823150163.jar
+[INFO] Found to be replaced file : WEB-INF/classes/application.common.properties
+[INFO] Start replacing: UM_UIC.war!WEB-INF/classes/application.common.properties
+[INFO] Replacing key with value: jdbc.username <keep the same value!>
+[INFO] Replacing key with value: jdbc.password <keep the same value!>
+[INFO] Replacing key with value: permission.authorization.host <keep the same value!>
+[INFO] Replacing key with value: permission.authorization.port <keep the same value!>
+[INFO] Replacing key with value: redis.Host <keep the same value!>
+[INFO] Replacing key with value: redis.Port <keep the same value!>
+[INFO] End replace: UM_UIC.war!WEB-INF/classes/application.common.properties
+[INFO] 
+[INFO] Found to be replaced file : WEB-INF/classes/application.properties
+[INFO] Start replacing: UM_UIC.war!WEB-INF/classes/application.properties
+[INFO] Replacing key with value: version.filePath <keep the same value!>
+[INFO] Replacing key with value: war.filePath <keep the same value!>
+[INFO] End replace: UM_UIC.war!WEB-INF/classes/application.properties
+[INFO] 
+[INFO] Found to be replaced file : WEB-INF/classes/log4j2.xml
+[INFO] Start replacing: UM_UIC.war!WEB-INF/classes/log4j2.xml
+[INFO] Replacing key with value: //Socket[@name='Logstash']/@host <value changed>
+[INFO] Replacing key with value: //Socket[@name='Logstash']/@port <value changed>
+[INFO] Replacing key with value: //Properties/property[@name='output_log_level']/text() <value changed>
+[INFO] End replace: UM_UIC.war!WEB-INF/classes/log4j2.xml
+[INFO] 
+[INFO] Replacing: E:\Jenkins_work\UM_UIC\workspace\target\UM_UIC.war with: C:\Users\UM_CI_~1\AppData\Local\Temp\15869944293664592281819207823150163.jar
+[INFO] All finished success!
+
+E:\Jenkins_work\UM_UIC\workspace\target>copy UM_UIC.war "\Jenkins_work\UM_UIC\workspace\target\BAK\Fri _9/_9/_17-54-28" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_UIC\workspace\target>copy git_version.txt "\Jenkins_work\UM_UIC\workspace\target\BAK\Fri _9/_9/_17-54-28" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_UIC\workspace\target>scp git_version.txt wzp@192.168.88.91:/home/wzp/git_version.txt 
+
+E:\Jenkins_work\UM_UIC\workspace\target>scp UM_UIC.war wzp@192.168.88.91:/home/wzp/ 
+
+E:\Jenkins_work\UM_UIC\workspace\target>exit 0 
+SSH: Connecting from host [WIN12FILESRV1]
+SSH: Connecting with configuration [LINUX WEB SVR-91-DevTest] ...
+SSH: EXEC: STDOUT/STDERR from command [/usr/apache-tomcat-7.0.65/publish_uic.sh] ...
+tomcat shutdown!!!
+kill -9 8258
+Stop tomcat success
+rm -rf  /usr/apache-tomcat-7.0.65/work/Catalina/uic.umu360.com
+rm -rf  /usr/apache-tomcat-7.0.65/conf/Catalina/uic.umu360.com
+rm -f  /usr/apache-tomcat-7.0.65/temp/*
+rm -f  /usr/apache-tomcat-7.0.65/logs/*
+rm: cannot remove ‘/usr/apache-tomcat-7.0.65/logs/ep’: Is a directory
+rm: cannot remove ‘/usr/apache-tomcat-7.0.65/logs/pigrecord’: Is a directory
+rm: cannot remove ‘/usr/apache-tomcat-7.0.65/logs/uic’: Is a directory
+rm -rf  /usr/apache-tomcat-7.0.65/UM_UIC/ROOT
+mv -f /home/wzp/UM_UIC.war /usr/apache-tomcat-7.0.65/UM_UIC/ROOT.war
+mv -f /home/wzp/git_version.txt /usr/apache-tomcat-7.0.65/UM_UIC/
+tomcat is starting!
+Tomcat started.
+SSH: EXEC: completed after 7,790 ms
+SSH: Disconnecting configuration [LINUX WEB SVR-91-DevTest] ...
+SSH: Transferred 0 file(s)
+Build step 'Send files or execute commands over SSH' changed build result to SUCCESS
+Finished: SUCCESS

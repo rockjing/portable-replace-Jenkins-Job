@@ -1,0 +1,78 @@
+Started by user [8mha:AAAAlR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzmEgZO/dLi1CL9xJRcAOFfZOu+AAAA[0m???
+Building in workspace E:\Jenkins_work\QA_UM_SolutionStore\workspace
+[workspace] $ cmd /c call C:\Users\UM_CI_~1\AppData\Local\Temp\hudson3498226823977503714.bat
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>SET PKG_NAME=UM_Store.war 
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>SET WORKSPACE=\Jenkins_work\UM_SolutionStore\workspace\target 
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>SET WAR_PKG=\Jenkins_work\UM_SolutionStore\workspace\target\UM_Store.war 
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>SET CUR_TIME=Mon _5/_6/_15-28-09 
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>SET BAK_FOLDER=\Jenkins_work\UM_SolutionStore\workspace\target\BAK\Mon _5/_6/_15-28-09 
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>ECHO Backup war to  
+Backup war to 
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>IF NOT EXIST "\Jenkins_work\UM_SolutionStore\workspace\target\BAK\Mon _5/_6/_15-28-09" MKDIR "\Jenkins_work\UM_SolutionStore\workspace\target\BAK\Mon _5/_6/_15-28-09" 
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>E:
+
+E:\Jenkins_work\QA_UM_SolutionStore\workspace>CD \Jenkins_work\UM_SolutionStore\workspace\target 
+
+E:\Jenkins_work\UM_SolutionStore\workspace\target>SET UMCONFIG=\Jenkins_work\UM-JENKINS-CONFIG\workspace 
+
+E:\Jenkins_work\UM_SolutionStore\workspace\target>Java -jar \Jenkins_work\UM-JENKINS-CONFIG\workspace\portable-config-maven-plugin-1.1.6-SNAPSHOT-cli.jar  UM_Store.war -c \Jenkins_work\UM-JENKINS-CONFIG\workspace\UM-STORE\UM-TEST\um_store_test.xml 
+[INFO] Tmp file: C:\Users\UM_CI_~1\AppData\Local\Temp\26112094675937281311541888552075234.jar
+[INFO] === Starting to find the to be replaced file
+[INFO] Found Config file : WEB-INF/classes/application.common.properties
+[INFO] Replacing: UM_Store.war!WEB-INF/classes/application.common.properties
+[INFO] redis.Host=192.168.88.80
+[INFO] permission.authorization.host=http://uic.umu360.com
+[INFO] permission.authorization.port=8080
+[INFO] Found Config file : WEB-INF/classes/application.properties
+[INFO] Replacing: UM_Store.war!WEB-INF/classes/application.properties
+[INFO] redis.Host=192.168.88.80
+[INFO] permission.authorization.host=http://uic.umu360.com
+[INFO] permission.authorization.port=8080
+[INFO] war.filePath=/usr/apache-tomcat-7.0.65/UM_Store/git_version.txt
+[INFO] version.filePath=/usr/apache-tomcat-7.0.65/UM_Store/ROOT.war
+[INFO] Defined config files :2 found file : 2
+[INFO] Replacing: E:\Jenkins_work\UM_SolutionStore\workspace\target\UM_Store.war with: C:\Users\UM_CI_~1\AppData\Local\Temp\26112094675937281311541888552075234.jar
+
+E:\Jenkins_work\UM_SolutionStore\workspace\target>copy UM_Store.war "\Jenkins_work\UM_SolutionStore\workspace\target\BAK\Mon _5/_6/_15-28-09" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_SolutionStore\workspace\target>copy git_version.txt "\Jenkins_work\UM_SolutionStore\workspace\target\BAK\Mon _5/_6/_15-28-09" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_SolutionStore\workspace\target>scp git_version.txt wzp@192.168.88.82:/home/wzp/git_version.txt 
+
+E:\Jenkins_work\UM_SolutionStore\workspace\target>scp UM_Store.war wzp@192.168.88.82:/home/wzp/ 
+
+E:\Jenkins_work\UM_SolutionStore\workspace\target>exit 0 
+SSH: Connecting from host [WIN12FILESRV1]
+SSH: Connecting with configuration [LINUX WEB SVR-82-Test] ...
+SSH: EXEC: STDOUT/STDERR from command [/usr/apache-tomcat-7.0.65/publish_store.sh] ...
+tomcat shutdown!!!
+kill -9 27215
+Stop tomcat success
+sleep 2!!!
+sleep end!!!
+rm -rf  /usr/apache-tomcat-7.0.65/work/Catalina/store.umu360.com
+rm -rf  /usr/apache-tomcat-7.0.65/conf/Catalina/store.umu360.com
+rm -f  /usr/apache-tomcat-7.0.65/temp/*
+rm -f  /usr/apache-tomcat-7.0.65/logs/*
+rm: cannot remove ‘/usr/apache-tomcat-7.0.65/logs/logs’: Is a directory
+rm -rf  /usr/apache-tomcat-7.0.65/UM_Store/ROOT
+mv -f /home/wzp/UM_Store.war /usr/apache-tomcat-7.0.65/UM_Store/ROOT.war
+mv -f /home/wzp/git_version.txt /usr/apache-tomcat-7.0.65/UM_Store/
+tomcat is starting!
+Tomcat started.
+ln -s /usr/solution /usr/apache-tomcat-7.0.65/UM_Store/ROOT/solution
+SSH: EXEC: completed after 67,344 ms
+SSH: Disconnecting configuration [LINUX WEB SVR-82-Test] ...
+SSH: Transferred 0 file(s)
+Build step 'Send files or execute commands over SSH' changed build result to SUCCESS
+Finished: SUCCESS

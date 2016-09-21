@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>QA 测试用的CAS SERVER和REDIS SERVER；  基于CAS-SERVER 4.0.0，修改并生成单点登录SSO项目； 项目编译打包为cas.war。&#xd;
+&#xd;
+自动发布 【Jenkins】UM_SSO_NEW的war包，并部署到:192.168.88.90&#xd;
+不用 git@git.oschina.net:rockj/UM_SSO.git&#xd;
+不会编译  cas-server-webapp/pom.xml</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Read:UM-QA</permission>
+      <permission>hudson.model.Item.Workspace:UM-QA</permission>
+      <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:UM-QA</permission>
+      <permission>hudson.model.Item.Build:UM-QA</permission>
+      <permission>hudson.model.Item.Discover:UM-QA</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>SET PKG_NAME=cas.war&#xd;
+SET WORKSPACE=\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\&#xd;
+SET WAR_PKG=%WORKSPACE%\%PKG_NAME%&#xd;
+SET CUR_TIME=%date:~0,4%_%date:~5,2%_%date:~8,2%_%TIME:~0,2%-%TIME:~3,2%-%TIME:~6,2%&#xd;
+SET BAK_FOLDER=%WORKSPACE%\BAK\%CUR_TIME%&#xd;
+&#xd;
+ECHO Backup war to &#xd;
+IF NOT EXIST &quot;%BAK_FOLDER%&quot; MKDIR &quot;%BAK_FOLDER%&quot;&#xd;
+&#xd;
+E:&#xd;
+CD %WORKSPACE%&#xd;
+copy %PKG_NAME% &quot;%BAK_FOLDER%&quot;&#xd;
+copy git_version.txt &quot;%BAK_FOLDER%&quot;&#xd;
+scp git_version.txt wzp@192.168.88.90:/home/wzp/git_version.txt&#xd;
+scp %PKG_NAME% wzp@192.168.88.90:/home/wzp/</command>
+    </hudson.tasks.BatchFile>
+    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.13">
+      <delegate>
+        <consolePrefix>SSH: </consolePrefix>
+        <delegate>
+          <publishers>
+            <jenkins.plugins.publish__over__ssh.BapSshPublisher>
+              <configName>LINUX CAS SVR-90-DevTest</configName>
+              <verbose>false</verbose>
+              <transfers>
+                <jenkins.plugins.publish__over__ssh.BapSshTransfer>
+                  <remoteDirectory></remoteDirectory>
+                  <sourceFiles></sourceFiles>
+                  <excludes></excludes>
+                  <removePrefix></removePrefix>
+                  <remoteDirectorySDF>false</remoteDirectorySDF>
+                  <flatten>false</flatten>
+                  <cleanRemote>false</cleanRemote>
+                  <noDefaultExcludes>false</noDefaultExcludes>
+                  <makeEmptyDirs>false</makeEmptyDirs>
+                  <patternSeparator>[, ]+</patternSeparator>
+                  <execCommand>/usr/apache-tomcat-7.0.67/publish_sso.sh</execCommand>
+                  <execTimeout>120000</execTimeout>
+                  <usePty>false</usePty>
+                </jenkins.plugins.publish__over__ssh.BapSshTransfer>
+              </transfers>
+              <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
+              <usePromotionTimestamp>false</usePromotionTimestamp>
+            </jenkins.plugins.publish__over__ssh.BapSshPublisher>
+          </publishers>
+          <continueOnError>false</continueOnError>
+          <failOnError>false</failOnError>
+          <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
+          <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
+        </delegate>
+      </delegate>
+    </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

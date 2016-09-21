@@ -1,0 +1,53 @@
+Started by user [8mha:AAAAlR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzmEgZO/dLi1CL9xJRcAOFfZOu+AAAA[0m???
+Building in workspace E:\Jenkins_work\DevTest_UM_SSO\workspace
+[workspace] $ cmd /c call C:\Users\UM_CI_~1\AppData\Local\Temp\hudson905764386616636603.bat
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>SET PKG_NAME=cas.war 
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>SET WORKSPACE=\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\ 
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>SET WAR_PKG=\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\\cas.war 
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>SET CUR_TIME=Fri _9/_2/_16-28-28 
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>SET BAK_FOLDER=\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\\BAK\Fri _9/_2/_16-28-28 
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>ECHO Backup war to  
+Backup war to 
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>IF NOT EXIST "\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\\BAK\Fri _9/_2/_16-28-28" MKDIR "\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\\BAK\Fri _9/_2/_16-28-28" 
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>E:
+
+E:\Jenkins_work\DevTest_UM_SSO\workspace>CD \Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\ 
+
+E:\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target>copy cas.war "\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\\BAK\Fri _9/_2/_16-28-28" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target>copy git_version.txt "\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target\\BAK\Fri _9/_2/_16-28-28" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target>scp git_version.txt wzp@192.168.88.90:/home/wzp/git_version.txt 
+
+E:\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target>scp cas.war wzp@192.168.88.90:/home/wzp/ 
+
+E:\Jenkins_work\UM_SSO_NEW\workspace\cas-server-webapp\target>exit 0 
+SSH: Connecting from host [WIN12FILESRV1]
+SSH: Connecting with configuration [LINUX CAS SVR-90-DevTest] ...
+SSH: EXEC: STDOUT/STDERR from command [/usr/apache-tomcat-7.0.67/publish_sso.sh] ...
+tomcat shutdown!!!
+Service already stoped
+rm -rf  /usr/apache-tomcat-7.0.67/webapps/cas
+rm -rf  /usr/apache-tomcat-7.0.67/work/Catalina/sso.umu360.com
+rm -rf  /usr/apache-tomcat-7.0.67/conf/Catalina/sso.umu360.com
+rm -f  /usr/apache-tomcat-7.0.67/temp/*
+rm -f  /usr/apache-tomcat-7.0.67/logs/*
+mv -f /home/wzp/cas.war /usr/apache-tomcat-7.0.67/webapps/cas.war
+mv -f /home/wzp/git_version.txt /usr/apache-tomcat-7.0.67/webapps/
+tomcat is starting!
+Tomcat started.
+SSH: EXEC: completed after 7,934 ms
+SSH: Disconnecting configuration [LINUX CAS SVR-90-DevTest] ...
+SSH: Transferred 0 file(s)
+Build step 'Send files or execute commands over SSH' changed build result to SUCCESS
+Finished: SUCCESS

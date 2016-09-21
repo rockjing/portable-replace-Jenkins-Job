@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>QA 测试用的事件消息产生和推送 后台任务&#xd;
+&#xd;
+从属于 Event Processor 事件和消息中心； &#xd;
+&#xd;
+自动发布 【Jenkins】UM_EP_Task_PushMessage的jar包，并部署到:192.168.88.91&#xd;
+&#xd;
+</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Read:UM-QA</permission>
+      <permission>hudson.model.Run.Delete:UM-QA</permission>
+      <permission>hudson.model.Item.Workspace:UM-QA</permission>
+      <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:UM-QA</permission>
+      <permission>hudson.model.Item.Build:UM-QA</permission>
+      <permission>hudson.model.Run.Replay:UM-QA</permission>
+      <permission>hudson.scm.SCM.Tag:UM-QA</permission>
+      <permission>hudson.model.Item.Discover:UM-QA</permission>
+      <permission>hudson.model.Run.Update:UM-QA</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>SET PKG_NAME=UM_EP_Task_PushMessage.jar&#xd;
+SET WORKSPACE=\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target&#xd;
+SET WAR_PKG=%WORKSPACE%\%PKG_NAME%&#xd;
+SET CUR_TIME=%date:~0,4%_%date:~5,2%_%date:~8,2%_%TIME:~0,2%-%TIME:~3,2%-%TIME:~6,2%&#xd;
+SET BAK_FOLDER=%WORKSPACE%\BAK\%CUR_TIME%&#xd;
+&#xd;
+ECHO Backup war to &#xd;
+IF NOT EXIST &quot;%BAK_FOLDER%&quot; MKDIR &quot;%BAK_FOLDER%&quot;&#xd;
+&#xd;
+SET UMCONFIG=\Jenkins_work\UM-JENKINS-CONFIG\workspace&#xd;
+Java -jar %UMCONFIG%\portable-config-maven-plugin-1.1.6-SNAPSHOT-cli.jar  %PKG_NAME% -c %UMCONFIG%\UM_EP_Task_PushMessage\UM-TEST\um_test.xml&#xd;
+&#xd;
+E:&#xd;
+CD %WORKSPACE%&#xd;
+copy %PKG_NAME% &quot;%BAK_FOLDER%&quot;&#xd;
+copy git_version.txt &quot;%BAK_FOLDER%&quot;&#xd;
+scp git_version.txt wzp@192.168.88.91:/usr/apache-tomcat-7.0.65/UM_EP/git_version_PushMessage.txt&#xd;
+scp %PKG_NAME% wzp@192.168.88.91:/usr/apache-tomcat-7.0.65/UM_EP/%PKG_NAME%&#xd;
+</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

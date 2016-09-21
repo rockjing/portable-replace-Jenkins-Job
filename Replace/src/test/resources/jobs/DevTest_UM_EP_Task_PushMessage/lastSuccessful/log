@@ -1,0 +1,40 @@
+Started by user [8mha:AAAAlR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzmEgZO/dLi1CL9xJRcAOFfZOu+AAAA[0m???
+Building in workspace E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace
+[workspace] $ cmd /c call C:\Users\UM_CI_~1\AppData\Local\Temp\hudson5717448299490439085.bat
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>SET PKG_NAME=UM_EP_Task_PushMessage.jar 
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>SET WORKSPACE=\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target 
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>SET WAR_PKG=\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target\UM_EP_Task_PushMessage.jar 
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>SET CUR_TIME=Fri _9/_2/_16-58-53 
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>SET BAK_FOLDER=\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target\BAK\Fri _9/_2/_16-58-53 
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>ECHO Backup war to  
+Backup war to 
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>IF NOT EXIST "\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target\BAK\Fri _9/_2/_16-58-53" MKDIR "\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target\BAK\Fri _9/_2/_16-58-53" 
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>SET UMCONFIG=\Jenkins_work\UM-JENKINS-CONFIG\workspace 
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>Java -jar \Jenkins_work\UM-JENKINS-CONFIG\workspace\portable-config-maven-plugin-1.1.6-SNAPSHOT-cli.jar  UM_EP_Task_PushMessage.jar -c \Jenkins_work\UM-JENKINS-CONFIG\workspace\UM_EP_Task_PushMessage\UM-TEST\um_test.xml 
+File/Directory: E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace\UM_EP_Task_PushMessage.jar does not exist
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>E:
+
+E:\Jenkins_work\DevTest_UM_EP_Task_PushMessage\workspace>CD \Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target 
+
+E:\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target>copy UM_EP_Task_PushMessage.jar "\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target\BAK\Fri _9/_2/_16-58-53" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target>copy git_version.txt "\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target\BAK\Fri _9/_2/_16-58-53" 
+        1 file(s) copied.
+
+E:\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target>scp git_version.txt wzp@192.168.88.91:/usr/apache-tomcat-7.0.65/UM_EP/git_version_PushMessage.txt 
+
+E:\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target>scp UM_EP_Task_PushMessage.jar wzp@192.168.88.91:/usr/apache-tomcat-7.0.65/UM_EP/UM_EP_Task_PushMessage.jar 
+
+E:\Jenkins_work\UM_EP_Task_PushMessage\workspace\PushMessage\target>exit 0 
+Finished: SUCCESS

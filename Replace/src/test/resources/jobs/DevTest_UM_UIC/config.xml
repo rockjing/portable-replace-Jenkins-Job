@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>QA 测试用的 UIC 用户中心；  项目编译打包为UM_UIC\ROOT.war。&#xd;
+&#xd;
+自动发布 【Jenkins】UM_UIC的war包，并部署到:192.168.88.91&#xd;
+不用 git@git.oschina.net:rockj/UM_UIC.git&#xd;
+不会编译  pom.xml</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Read:UM-QA</permission>
+      <permission>hudson.model.Run.Delete:UM-QA</permission>
+      <permission>hudson.model.Item.Workspace:UM-QA</permission>
+      <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:UM-QA</permission>
+      <permission>hudson.model.Item.Build:UM-QA</permission>
+      <permission>hudson.model.Run.Replay:UM-QA</permission>
+      <permission>hudson.scm.SCM.Tag:UM-QA</permission>
+      <permission>hudson.model.Item.Discover:UM-QA</permission>
+      <permission>hudson.model.Run.Update:UM-QA</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>SET PKG_NAME=UM_UIC.war&#xd;
+SET WORKSPACE=\Jenkins_work\UM_UIC\workspace\target&#xd;
+SET WAR_PKG=%WORKSPACE%\%PKG_NAME%&#xd;
+SET CUR_TIME=%date:~0,4%_%date:~5,2%_%date:~8,2%_%TIME:~0,2%-%TIME:~3,2%-%TIME:~6,2%&#xd;
+SET BAK_FOLDER=%WORKSPACE%\BAK\%CUR_TIME%&#xd;
+&#xd;
+ECHO Backup war to &#xd;
+IF NOT EXIST &quot;%BAK_FOLDER%&quot; MKDIR &quot;%BAK_FOLDER%&quot;&#xd;
+&#xd;
+E:&#xd;
+CD %WORKSPACE%&#xd;
+&#xd;
+SET UMCONFIG=\Jenkins_work\UM-JENKINS-CONFIG\workspace&#xd;
+Java -jar %UMCONFIG%\portable-config-maven-plugin-1.1.6-SNAPSHOT-cli.jar  %PKG_NAME% -c %UMCONFIG%\UM-UIC\UM-TEST\um_uic_test.xml&#xd;
+&#xd;
+copy %PKG_NAME% &quot;%BAK_FOLDER%&quot;&#xd;
+copy git_version.txt &quot;%BAK_FOLDER%&quot;&#xd;
+scp git_version.txt wzp@192.168.88.91:/home/wzp/git_version.txt&#xd;
+scp %PKG_NAME% wzp@192.168.88.91:/home/wzp/</command>
+    </hudson.tasks.BatchFile>
+    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.13">
+      <delegate>
+        <consolePrefix>SSH: </consolePrefix>
+        <delegate>
+          <publishers>
+            <jenkins.plugins.publish__over__ssh.BapSshPublisher>
+              <configName>LINUX WEB SVR-91-DevTest</configName>
+              <verbose>false</verbose>
+              <transfers>
+                <jenkins.plugins.publish__over__ssh.BapSshTransfer>
+                  <remoteDirectory></remoteDirectory>
+                  <sourceFiles></sourceFiles>
+                  <excludes></excludes>
+                  <removePrefix></removePrefix>
+                  <remoteDirectorySDF>false</remoteDirectorySDF>
+                  <flatten>false</flatten>
+                  <cleanRemote>false</cleanRemote>
+                  <noDefaultExcludes>false</noDefaultExcludes>
+                  <makeEmptyDirs>false</makeEmptyDirs>
+                  <patternSeparator>[, ]+</patternSeparator>
+                  <execCommand>/usr/apache-tomcat-7.0.65/publish_uic.sh</execCommand>
+                  <execTimeout>120000</execTimeout>
+                  <usePty>false</usePty>
+                </jenkins.plugins.publish__over__ssh.BapSshTransfer>
+              </transfers>
+              <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
+              <usePromotionTimestamp>false</usePromotionTimestamp>
+            </jenkins.plugins.publish__over__ssh.BapSshPublisher>
+          </publishers>
+          <continueOnError>false</continueOnError>
+          <failOnError>false</failOnError>
+          <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
+          <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
+        </delegate>
+      </delegate>
+    </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
