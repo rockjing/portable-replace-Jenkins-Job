@@ -3,6 +3,8 @@ package Umu360;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.*;
+import org.codehaus.plexus.DefaultPlexusContainer;
+import org.codehaus.plexus.PlexusContainer;
 
 import java.io.File;
 
@@ -19,10 +21,23 @@ public class App
 
         displayHelpIfNeeded(options, cmd);
 
-        File targetFolder = new File(cmd.getOptionValue("d"));
 
-        if(targetFolder.isDirectory())
-            System.out.println(targetFolder.getAbsolutePath());
+
+        String fileName = cmd.getOptionValue("d");
+        if(fileName == null || fileName.length() == 0)
+            throw new MissingArgumentException("can't find Jenkins Job Folder, please check param d! ");
+
+
+        File targetFolder = new File(fileName);
+
+
+        if(!targetFolder.isDirectory()) {
+
+            throw new MissingArgumentException("can't find Jenkins Job Folder" + fileName);
+        }
+
+
+        PlexusContainer container = new DefaultPlexusContainer();
 
 
 
@@ -42,7 +57,7 @@ public class App
     private static void displayHelpIfNeeded(Options options, CommandLine cmd) {
         if (cmd.hasOption("h")) {
             HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("java -jar portable-config-maven-plugin-1.0.2-cli.jar", options);
+            formatter.printHelp("java -jar  xxx.jar -d [JobFolder] -j [part name of ] -b [branchName]", options);
             System.exit(0);
         }
     }
@@ -53,7 +68,7 @@ public class App
         Options options = new Options();
 
         Option d = OptionBuilder.withArgName("JobFolder").hasArg().withDescription("Jenkins Job Folder").create("d");
-        Option j = OptionBuilder.withArgName("toReplacedJobs").hasArg().withDescription("the jobs array").create("j");
+        Option j = OptionBuilder.withArgName("toReplacedJobs").hasArg().withDescription("The part of Job Name").create("j");
         Option b = OptionBuilder.withArgName("branch").hasArg().withDescription("the branch").create("b");
 
         Option h = OptionBuilder.withDescription("display help").create("h");

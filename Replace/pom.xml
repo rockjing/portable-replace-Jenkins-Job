@@ -10,8 +10,16 @@
   <name>portable-replace-Jenkins-Job</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+
+      <maven.plugin.plugin.version>3.2</maven.plugin.plugin.version>
+      <plexus.version>1.5.5</plexus.version>
+
+
   </properties>
 
   <dependencies>
@@ -37,6 +45,25 @@
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-component-annotations</artifactId>
+      <version>${plexus.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-container-default</artifactId>
+      <version>${plexus.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.ximpleware</groupId>
+      <artifactId>vtd-xml</artifactId>
+      <version>2.11</version>
     </dependency>
 
   </dependencies>
